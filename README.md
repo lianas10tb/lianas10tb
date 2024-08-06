@@ -1,13 +1,29 @@
-![repository-open-graph-template](https://github.com/user-attachments/assets/72778c1d-a227-4574-9091-2c65aedeb5ef)
-- 👋 Hi, I’m @lianas10tb
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+// Define the BCD inputs and the segment outputs
+int BCD_A = 2; // Pin 7 on CD4511
+int BCD_B = 3; // Pin 1 on CD4511
+int BCD_C = 4; // Pin 2 on CD4511
+int BCD_D = 5; // Pin 6 on CD4511
 
-<!---
-lianas10tb/lianas10tb is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+void setup() {
+  // Set all the BCD pins to output
+  pinMode(BCD_A, OUTPUT);
+  pinMode(BCD_B, OUTPUT);
+  pinMode(BCD_C, OUTPUT);
+  pinMode(BCD_D, OUTPUT);
+}
+
+void loop() {
+  // Loop through numbers 0-9 and display on 7-segment
+  for (int number = 0; number < 10; number++) {
+    displayNumber(number);
+    delay(1000); // Wait for 1 second
+  }
+}
+
+void displayNumber(int number) {
+  // Use bitwise operators to isolate each bit of the number
+  digitalWrite(BCD_A, number & 0x01);
+  digitalWrite(BCD_B, number & 0x02);
+  digitalWrite(BCD_C, number & 0x04);
+  digitalWrite(BCD_D, number & 0x08);
+}
